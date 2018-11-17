@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DictFiledMapper">
+    <sql id="selectSql">
+        SELECT
+        `id` as id,
+        `dict_id` as dictId,
+        `filed` as filed,
+        `filed_value` as filedValue,
+        `create_time` as createTime,
+        `update_time` as updateTime
+        FROM t_dict_filed
+    </sql>
+
+    <select id="selectById" resultType="com.heyu.spider.page.entity.dict.DictFiled">
+        <include refid="selectSql" />
+        WHERE
+        id = #{id}
+        LIMIT 1
+    </select>
+
+
+    <insert id="insert" parameterType="com.heyu.spider.page.entity.dict.DictFiled" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO
+        t_dict_filed (`dict_id`,`filed`,`filed_value`,`create_time`,`update_time`)
+        VALUES (#{dictId},#{filed},#{filedValue},#{createTime},#{updateTime})
+    </insert>
+
+    <delete id="deleteById" parameterType="com.heyu.spider.page.entity.dict.DictFiled">
+        DELETE FROM t_dict_filed
+        WHERE
+        id = #{id}
+    </delete>
+
+    <select id="findAllList" resultType="com.heyu.spider.page.entity.dict.DictFiled">
+    <include refid="selectSql" />
+    </select>
+
+    <select id="findByCondition" resultType="com.heyu.spider.page.entity.dict.DictFiled">
+    <include refid="selectSql" />
+        <where>
+            1=1
+        </where>
+        limit #{offset},#{pageSize}
+    </select>
+
+    <select id="getTotalCount" resultType="java.lang.Long">
+        SELECT count(1)
+        FROM t_dict_filed
+        <where>
+            1=1
+        </where>
+    </select>
+
+    <update id="update" parameterType="com.heyu.spider.page.entity.dict.DictFiled">
+        update t_dict_filed
+        set
+        `dict_id` = #{dictId},
+        `filed` = #{filed},
+        `filed_value` = #{filedValue},
+        `create_time` = #{createTime},
+        `update_time` = #{updateTime}
+        where
+    id = #{id}
+    </update>
+
+
+</mapper>

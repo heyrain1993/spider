@@ -1,0 +1,9 @@
+.idea
+.idea/*
+.svn
+*.iml
+.target
+*.tld
+*/*.iml
+*/target
+*.log

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TitleMapper">
+    <sql id="selectSql">
+        SELECT
+        `id` as id,
+        `first_title` as firstTitle,
+        `second_title` as secondTitle,
+        `thrid_title` as thridTitle,
+        `create_time` as createTime,
+        `update_time` as updateTime
+        FROM t_title
+    </sql>
+
+    <select id="selectById" resultType="com.heyu.spider.page.entity.title.Title">
+        <include refid="selectSql" />
+        WHERE
+        id = #{id}
+        LIMIT 1
+    </select>
+
+
+    <insert id="insert" parameterType="com.heyu.spider.page.entity.title.Title" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO
+        t_title (`first_title`,`second_title`,`thrid_title`,`create_time`,`update_time`)
+        VALUES (#{firstTitle},#{secondTitle},#{thridTitle},#{createTime},#{updateTime})
+    </insert>
+
+    <delete id="deleteById" parameterType="com.heyu.spider.page.entity.title.Title">
+        DELETE FROM t_title
+        WHERE
+        id = #{id}
+    </delete>
+
+    <select id="findAllList" resultType="com.heyu.spider.page.entity.title.Title">
+    <include refid="selectSql" />
+    </select>
+
+    <select id="findByCondition" resultType="com.heyu.spider.page.entity.title.Title">
+    <include refid="selectSql" />
+        <where>
+            1=1
+        </where>
+        limit #{offset},#{pageSize}
+    </select>
+
+    <select id="getTotalCount" resultType="java.lang.Long">
+        SELECT count(1)
+        FROM t_title
+        <where>
+            1=1
+        </where>
+    </select>
+
+    <update id="update" parameterType="com.heyu.spider.page.entity.title.Title">
+        update t_title
+        set
+        `first_title` = #{firstTitle},
+        `second_title` = #{secondTitle},
+        `thrid_title` = #{thridTitle},
+        `create_time` = #{createTime},
+        `update_time` = #{updateTime}
+        where
+    id = #{id}
+    </update>
+
+
+</mapper>
