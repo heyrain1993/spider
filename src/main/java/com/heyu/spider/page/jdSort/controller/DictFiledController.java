@@ -1,30 +1,19 @@
-package com.heyu.spider.page.controller.dict;
+package com.heyu.spider.page.jdSort.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.yunji.oms.common.Constants;
 
-import com.yunji.oms.admin.exception.CustomException;
-import com.yunji.oms.admin.utils.ExportUtils;
-import com.yunji.oms.stock.entity.common.PageData;
-import com.yunji.oms.stock.entity.common.PageUtils;
-import com.yunji.oms.common.entity.Response;
-import com.yunji.sso.client.annotation.RequiresPermissions;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import com.yunji.oms.stock.api.common.ICacheService;
 
-import com.heyu.spider.page.entity.dict.DictFiled;
-import com.heyu.spider.page.api.dict.IDictFiledService;
-
-@RequestMapping("\dict\filed")
+@RequestMapping("/dict/filed")
 @Controller
 public class DictFiledController {
 
-    @Autowired
+    /*@Autowired
     private IDictFiledService dictFiledService;
     @Autowired
     private  ICacheService cacheService;
@@ -36,9 +25,9 @@ public class DictFiledController {
         return new ModelAndView("/views/\dict\filed.html");
     }
 
-    /**
-    *   ·ÖÒ³²éÑ¯ÁÐ±í
-    */
+    *//**
+    *   ï¿½ï¿½Ò³ï¿½ï¿½Ñ¯ï¿½Ð±ï¿½
+    *//*
     @RequiresPermissions("oms:\dict\filed:list")
     @RequestMapping(value = "/page", method = RequestMethod.GET, produces = { "application/json;charset=UTF-8" })
     @ResponseBody
@@ -46,9 +35,9 @@ public class DictFiledController {
         return dictFiledService.findByPage(dictFiled,pageUtils);
     }
 
-    /**
-    *   Ôö¼Ó
-    */
+    *//**
+    *   ï¿½ï¿½ï¿½ï¿½
+    *//*
     @RequiresPermissions("oms:\dict\filed:add")
     @RequestMapping(value = "/add")
     @ResponseBody
@@ -57,15 +46,15 @@ public class DictFiledController {
         Boolean flag=dictFiledService.insert(dictFiled);
         if(!flag) {
             response.setCode(Response.FLAG_FAIL);
-            response.setMessage("Çë¼ì²é±àÂë»òÕßÃû³ÆÊÇ·ñÖØ¸´!");
+            response.setMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ø¸ï¿½!");
         }else{
             response.setCode(Response.FLAG_SUCCESS);
         }
         return response;
     }
-    /**
-    *   ÐÞ¸Ä
-    */
+    *//**
+    *   ï¿½Þ¸ï¿½
+    *//*
     @RequiresPermissions("oms:\dict\filed:update")
     @RequestMapping(value = "/update")
     @ResponseBody
@@ -74,16 +63,16 @@ public class DictFiledController {
         Boolean flag=dictFiledService.update(dictFiled);
         if(!flag) {
             response.setCode(Response.FLAG_FAIL);
-            response.setMessage("Çë¼ì²é±àÂë»òÕßÃû³ÆÊÇ·ñÖØ¸´!");
+            response.setMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ø¸ï¿½!");
         }else{
             response.setCode(Response.FLAG_SUCCESS);
         }
         return response;
     }
 
-    /**
-    *   É¾³ý
-    */
+    *//**
+    *   É¾ï¿½ï¿½
+    *//*
     @RequiresPermissions("oms:\dict\filed:delete")
     @RequestMapping(value = "/delete", method = RequestMethod.POST, produces = { "application/json;charset=UTF-8" })
     @ResponseBody
@@ -107,14 +96,14 @@ public class DictFiledController {
             pageUtils.setPage(1L);
             pageUtils.setRows(5000);
             List<DictFiled> list = dictFiledService.findByPage(dictFiled, pageUtils).getRows();
-            String fileName = "ÇþµÀÁÐ±í";
+            String fileName = "ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½";
             String expression = "";
             ExportUtils.exportExcel(list, titles, fieldNames, expression, response, fileName);
             cacheService.delCache(Constants.DOWNLOAD_LOADING+requestId);
         }
         catch (Exception e) {
-            throw new CustomException.DataExportException("Êý¾Ýµ¼³ö³öÏÖÒì³££¬" + e.getMessage());
+            throw new CustomException.DataExportException("ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½" + e.getMessage());
         }
-    }
+    }*/
 
 }

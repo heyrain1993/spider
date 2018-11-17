@@ -1,75 +1,53 @@
-package com.heyu.spider.page.dao.dict;
+package com.heyu.spider.page.jdSort.dao;
 
-import com.heyu.spider.page.entity.dict.DictFiled;
+import com.heyu.spider.page.jdSort.entity.DictFiled;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
-import org.apache.ibatis.session.SqlSession;
-import java.util.HashMap;
-import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public class DictFiledDao{
-
-    @Autowired
-    private SqlSession session;
+@Mapper
+public interface DictFiledDao{
 
     /**
-     *  ¸ù¾Ýid²éÕÒ
+     *  ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½ï¿½ï¿½
      */
-    public DictFiled findById(Integer id){
-        return session.selectOne("DictFiledMapper.selectById",id);
-    }
+    public DictFiled findById(Integer id);
 
     /**
-     *  ²åÈë¼ÇÂ¼
+     *  ï¿½ï¿½ï¿½ï¿½ï¿½Â¼
      */
-    public Boolean insert(DictFiled dictFiled){
-        return session.insert("DictFiledMapper.insert",dictFiled) > 0;
-    }
+    public Boolean insert(DictFiled dictFiled);
 
     /**
-     *  ¸ù¾ÝidÉ¾³ý
+     *  ï¿½ï¿½ï¿½ï¿½idÉ¾ï¿½ï¿½
      */
-    public Boolean deleteById(Integer id){
-        return session.delete("DictFiledMapper.deleteById",id) > 0;
-    }
+    public Boolean deleteById(Integer id);
     /**
-     *  ²éÕÒËùÓÐ
+     *  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
-    public List<DictFiled> findAllList(){
-        return session.selectList("DictFiledMapper.findAllList");
-    }
-
+    public List<DictFiled> findAllList();
     /**
-    * ·ÖÒ³²éÑ¯ÁÐ±í
+    * ï¿½ï¿½Ò³ï¿½ï¿½Ñ¯ï¿½Ð±ï¿½
     */
-    public List<DictFiled> findByCondition(Integer pageNumber,Integer pageSize,DictFiled dictFiled){
-        Map<String ,Object> paramsMap = new HashMap<String,Object>(3);
-        paramsMap.put("offset",(pageNumber-1)*pageSize);
-        paramsMap.put("pageSize",pageSize);
-        paramsMap.put("dictFiled",dictFiled);
-        return session.selectList("DictFiledMapper.findByCondition",paramsMap);
-    }
+    public List<DictFiled> findByCondition(Integer pageNumber,Integer pageSize,DictFiled dictFiled);
 
     /**
-    * »ñÈ¡·ÖÒ³µÄ×ÜÊý
+    * ï¿½ï¿½È¡ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     */
-    public Long getTotalCount(DictFiled dictFiled){
-        Map<String,Object> paramsMap = new HashMap<String,Object>(1);
-        paramsMap.put("dictFiled",dictFiled);
-        return session.selectOne("DictFiledMapper.getTotalCount",paramsMap);
-    }
+    public Long getTotalCount(DictFiled dictFiled);
 
     /**
-    * ¸üÐÂ
+    * ï¿½ï¿½ï¿½ï¿½
     *
     */
-    public Boolean update(DictFiled dictFiled){
-        return session.update("DictFiledMapper.update",dictFiled) >0;
-    }
+    public Boolean update(DictFiled dictFiled);
 
-    public void setSession(SqlSession session) {
-        this.session = session;
-    }
+    void insertBatch(List<DictFiled> dictFileds);
+
+    List<DictFiled> findByDictId(@Param("dictId") Integer id);
+
+    List<String> findFiled(@Param("dictId")Integer dictId);
+
+    List<String> findFiledValue(@Param("dictId")Integer dictId, @Param("filed")String filed);
 }

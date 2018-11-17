@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/spider?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 10
+  tomcat:
+    uri-encoding: utf-8
+mybatis:
+  mapper-locations: classpath:mybatis/*.xml
+  type-aliases-package: com.heyu.spider.page.jdSort.entity
+logging:
+  level:
+    com.heyu.spider.page.jdSort.dao : debug
+
+

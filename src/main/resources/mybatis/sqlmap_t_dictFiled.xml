@@ -2,11 +2,12 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="DictFiledMapper">
+<mapper namespace="com.heyu.spider.page.jdSort.dao.DictFiledDao">
     <sql id="selectSql">
         SELECT
         `id` as id,
         `dict_id` as dictId,
+        `dict_name` as dictName,
         `filed` as filed,
         `filed_value` as filedValue,
         `create_time` as createTime,
@@ -14,7 +15,7 @@
         FROM t_dict_filed
     </sql>
 
-    <select id="selectById" resultType="com.heyu.spider.page.entity.dict.DictFiled">
+    <select id="selectById" resultType="com.heyu.spider.page.jdSort.entity.DictFiled">
         <include refid="selectSql" />
         WHERE
         id = #{id}
@@ -22,23 +23,54 @@
     </select>
 
 
-    <insert id="insert" parameterType="com.heyu.spider.page.entity.dict.DictFiled" useGeneratedKeys="true" keyProperty="id" >
+    <insert id="insert" parameterType="com.heyu.spider.page.jdSort.entity.DictFiled" useGeneratedKeys="true" keyProperty="id" >
         INSERT INTO
-        t_dict_filed (`dict_id`,`filed`,`filed_value`,`create_time`,`update_time`)
-        VALUES (#{dictId},#{filed},#{filedValue},#{createTime},#{updateTime})
+        t_dict_filed (`dict_id`,`dict_name`,`filed`,`filed_value`,`create_time`,`update_time`)
+        VALUES (#{dictId},#{dictName},#{filed},#{filedValue},#{createTime},#{updateTime})
     </insert>
 
-    <delete id="deleteById" parameterType="com.heyu.spider.page.entity.dict.DictFiled">
+    <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO
+        t_dict_filed (`dict_id`,`dict_name`,`filed`,`filed_value`,`create_time`,`update_time`)
+        VALUES
+        <if test="list != null and list.size != 0">
+            <foreach collection ="list" item="item" index= "index" separator =",">
+                (#{item.dictId},#{item.dictName},#{item.filed},#{item.filedValue},#{item.createTime},#{item.updateTime})
+            </foreach>
+        </if>
+    </insert>
+
+    <delete id="deleteById" parameterType="com.heyu.spider.page.jdSort.entity.DictFiled">
         DELETE FROM t_dict_filed
         WHERE
         id = #{id}
     </delete>
 
-    <select id="findAllList" resultType="com.heyu.spider.page.entity.dict.DictFiled">
+    <select id="findAllList" resultType="com.heyu.spider.page.jdSort.entity.DictFiled">
     <include refid="selectSql" />
+
     </select>
 
-    <select id="findByCondition" resultType="com.heyu.spider.page.entity.dict.DictFiled">
+    <select id="findByDictId" resultType="com.heyu.spider.page.jdSort.entity.DictFiled">
+        <include refid="selectSql" />
+        WHERE dict_id = #{dictId}
+    </select>
+
+    <select id="findFiled" resultType="java.lang.String">
+        SELECT filed
+        from t_dict_filed
+        WHERE dict_id = #{dictId}
+        GROUP BY  filed
+    </select>
+
+    <select id="findFiledValue" resultType="java.lang.String">
+        SELECT filed_value
+        from t_dict_filed
+        WHERE dict_id = #{dictId} AND filed = #{filed}
+
+    </select>
+
+    <select id="findByCondition" resultType="com.heyu.spider.page.jdSort.entity.DictFiled">
     <include refid="selectSql" />
         <where>
             1=1
@@ -54,7 +86,7 @@
         </where>
     </select>
 
-    <update id="update" parameterType="com.heyu.spider.page.entity.dict.DictFiled">
+    <update id="update" parameterType="com.heyu.spider.page.jdSort.entity.DictFiled">
         update t_dict_filed
         set
         `dict_id` = #{dictId},

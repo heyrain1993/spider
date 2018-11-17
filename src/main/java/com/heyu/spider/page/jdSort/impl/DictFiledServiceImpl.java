@@ -1,18 +1,12 @@
-package com.heyu.spider.page.service.dict;
+package com.heyu.spider.page.jdSort.impl;
 
-import com.heyu.spider.page.entity.dict.DictFiled;
-import com.heyu.spider.page.api.dict.IDictFiledService;
-import com.heyu.spider.page.dao.dict.DictFiledDao;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import com.heyu.spider.page.jdSort.api.IDictFiledService;
+import com.heyu.spider.page.jdSort.dao.DictFiledDao;
+import com.heyu.spider.page.jdSort.entity.DictFiled;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.yunji.oms.stock.entity.common.PageData;
-import com.yunji.oms.stock.entity.common.PageUtils;
 
+import java.util.List;
 
 @Service("dictFiledService")
 public class DictFiledServiceImpl implements IDictFiledService {
@@ -21,44 +15,44 @@ public class DictFiledServiceImpl implements IDictFiledService {
     private DictFiledDao dictFiledDao;
 
     /**
-     *  ¸ù¾Ýid²éÕÒ
+     *  ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½ï¿½ï¿½
      */
     public DictFiled getById(Integer id) {
         return dictFiledDao.findById(id);
     }
 
     /**
-     *  ²åÈë¼ÇÂ¼
+     *  ï¿½ï¿½ï¿½ï¿½ï¿½Â¼
      */
     public Boolean insert(DictFiled dictFiled) {
         return dictFiledDao.insert(dictFiled);
     }
 
     /**
-     *  ¸ù¾ÝidÉ¾³ý
+     *  ï¿½ï¿½ï¿½ï¿½idÉ¾ï¿½ï¿½
      */
     public Boolean deleteById(Integer id) {
         return dictFiledDao.deleteById(id);
     }
     /**
-     *  ²éÕÒËùÓÐ
+     *  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public List<DictFiled> findAllList() {
         return dictFiledDao.findAllList();
     }
 
     /**
-    *   ·ÖÒ³²éÕÒ
+    *   ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½
     */
-    public PageData<DictFiled> findByPage(DictFiled dictFiled,PageUtils pageUtils){
-        //»ñÈ¡Êý¾Ý¿âÖÐ×ÜÊý
+    /*public PageData<DictFiled> findByPage(DictFiled dictFiled,PageUtils pageUtils){
+        //ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Long count=dictFiledDao.getTotalCount(dictFiled);
         if(count == null || count==0){
             return PageData.EMPTY_PAGE;
         }
         List<DictFiled> resultList=dictFiledDao.findByCondition(pageUtils.getPage().intValue(),pageUtils.getRows(),dictFiled);
         return new PageData<DictFiled>(resultList,count);
-    }
+    }*/
 
     public Boolean update(DictFiled dictFiled){
         return dictFiledDao.update(dictFiled);

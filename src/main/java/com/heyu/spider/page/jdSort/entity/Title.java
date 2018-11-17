@@ -1,4 +1,4 @@
-package com.heyu.spider.page.entity.title;
+package com.heyu.spider.page.jdSort.entity;
 import java.util.Date;
 
 import java.io.Serializable;
@@ -7,36 +7,46 @@ import java.io.Serializable;
 public class Title implements Serializable{
 
     /**
-        ×ÔÔöID
+        ï¿½ï¿½ï¿½ï¿½ID
      */
     private Integer id;
 
+    private Integer dictId;
+
     /**
-        Ò»¼¶Ä¿Â¼
+        Ò»ï¿½ï¿½Ä¿Â¼
      */
     private String firstTitle;
 
     /**
-        ¶þ¼¶Ä¿Â¼
+        ï¿½ï¿½ï¿½ï¿½Ä¿Â¼
      */
     private String secondTitle;
 
     /**
-        Èý¼¶Ä¿Â¼
+        ï¿½ï¿½ï¿½ï¿½Ä¿Â¼
      */
     private String thridTitle;
 
     /**
-        ´´½¨Ê±¼ä
+        ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
      */
     private Date createTime;
 
     /**
-        ¸üÐÂÊ±¼ä
+        ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
      */
     private Date updateTime;
 
+    private String url;
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public Integer getId() {
         return id;
@@ -46,6 +56,13 @@ public class Title implements Serializable{
         this.id = id;
     }
 
+    public Integer getDictId() {
+        return dictId;
+    }
+
+    public void setDictId(Integer dictId) {
+        this.dictId = dictId;
+    }
 
     public String getFirstTitle() {
         return firstTitle;

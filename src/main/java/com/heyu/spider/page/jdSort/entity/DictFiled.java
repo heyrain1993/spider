@@ -1,4 +1,4 @@
-package com.heyu.spider.page.jdSort.entity.dict;
+package com.heyu.spider.page.jdSort.entity;
 import java.util.Date;
 
 import java.io.Serializable;
@@ -15,6 +15,8 @@ public class DictFiled implements Serializable{
         Ŀ¼ID
      */
     private Integer dictId;
+
+    private String dictName;
 
     /**
         ������
@@ -55,6 +57,13 @@ public class DictFiled implements Serializable{
         this.dictId = dictId;
     }
 
+    public String getDictName() {
+        return dictName;
+    }
+
+    public void setDictName(String dictName) {
+        this.dictName = dictName;
+    }
 
     public String getFiled() {
         return filed;

@@ -1,75 +1,38 @@
-package com.heyu.spider.page.dao.title;
+package com.heyu.spider.page.jdSort.dao;
 
-import com.heyu.spider.page.entity.title.Title;
+import com.heyu.spider.page.jdSort.entity.Title;
+import org.apache.ibatis.annotations.Mapper;
+import java.util.ArrayList;
 import java.util.List;
-import org.apache.ibatis.session.SqlSession;
-import java.util.HashMap;
-import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public class TitleDao{
-
-    @Autowired
-    private SqlSession session;
+@Mapper
+public interface TitleDao{
 
     /**
-     *  ¸ù¾İid²éÕÒ
+     *  ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½ï¿½ï¿½
      */
-    public Title findById(Integer id){
-        return session.selectOne("TitleMapper.selectById",id);
-    }
+    public Title selectById(Integer id);
 
     /**
-     *  ²åÈë¼ÇÂ¼
+     *  ï¿½ï¿½ï¿½ï¿½ï¿½Â¼
      */
-    public Boolean insert(Title title){
-        return session.insert("TitleMapper.insert",title) > 0;
-    }
+    public Boolean insert(Title title);
 
     /**
-     *  ¸ù¾İidÉ¾³ı
+     *  ï¿½ï¿½ï¿½ï¿½idÉ¾ï¿½ï¿½
      */
-    public Boolean deleteById(Integer id){
-        return session.delete("TitleMapper.deleteById",id) > 0;
-    }
+    public Boolean deleteById(Integer id);
     /**
-     *  ²éÕÒËùÓĞ
+     *  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
-    public List<Title> findAllList(){
-        return session.selectList("TitleMapper.findAllList");
-    }
+    public List<Title> findAllList();
+
 
     /**
-    * ·ÖÒ³²éÑ¯ÁĞ±í
-    */
-    public List<Title> findByCondition(Integer pageNumber,Integer pageSize,Title title){
-        Map<String ,Object> paramsMap = new HashMap<String,Object>(3);
-        paramsMap.put("offset",(pageNumber-1)*pageSize);
-        paramsMap.put("pageSize",pageSize);
-        paramsMap.put("title",title);
-        return session.selectList("TitleMapper.findByCondition",paramsMap);
-    }
-
-    /**
-    * »ñÈ¡·ÖÒ³µÄ×ÜÊı
-    */
-    public Long getTotalCount(Title title){
-        Map<String,Object> paramsMap = new HashMap<String,Object>(1);
-        paramsMap.put("title",title);
-        return session.selectOne("TitleMapper.getTotalCount",paramsMap);
-    }
-
-    /**
-    * ¸üĞÂ
+    * ï¿½ï¿½ï¿½ï¿½
     *
     */
-    public Boolean update(Title title){
-        return session.update("TitleMapper.update",title) >0;
-    }
+    public Boolean update(Title title);
 
-    public void setSession(SqlSession session) {
-        this.session = session;
-    }
+    void insertBatch(ArrayList<Title> titles);
 }

@@ -1,38 +1,31 @@
-package com.heyu.spider.page.api.dict;
+package com.heyu.spider.page.jdSort.api;
 
-import com.heyu.spider.page.entity.dict.Dict;
+
+import com.heyu.spider.page.jdSort.entity.Dict;
 
 import java.util.List;
-import com.yunji.oms.stock.entity.common.PageData;
-import com.yunji.oms.stock.entity.common.PageUtils;
-
 
 public interface IDictService {
 
     /**
-     *  ¸ù¾İid²éÕÒ
+     *  ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½ï¿½ï¿½
      */
     Dict getById(Integer id);
 
     /**
-     *  ²åÈë¼ÇÂ¼
+     *  ï¿½ï¿½ï¿½ï¿½ï¿½Â¼
      */
     Boolean insert(Dict dict);
 
     /**
-     *  ¸ù¾İidÉ¾³ı
+     *  ï¿½ï¿½ï¿½ï¿½idÉ¾ï¿½ï¿½
      */
     Boolean deleteById(Integer id);
 
     /**
-     *  ²éÕÒËùÓĞ
+     *  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     List<Dict> findAllList();
-
-    /**
-    *   ·ÖÒ³²éÕÒ
-    */
-    PageData<Dict> findByPage(Dict dict,PageUtils pageUtils);
 
     Boolean update(Dict dict);
 }

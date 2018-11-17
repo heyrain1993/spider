@@ -4,6 +4,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -65,12 +66,19 @@ public class HttpUtil {
             }
 
             HttpClient httpClient = HttpClients.createDefault();
+            RequestConfig requestConfig = RequestConfig.custom()
+                    .setSocketTimeout(10000).setConnectTimeout(10000)
+                    .build();//设置请求和
+            httpGet.setConfig(requestConfig);
             HttpResponse response = httpClient.execute(httpGet);
             HttpEntity responseEntity = null;
             if(response != null && response.getStatusLine().getStatusCode() == 200){
                 responseEntity = response.getEntity();
             }
-            result = EntityUtils.toString(responseEntity,"UTF-8");
+            if (responseEntity == null){
+                return null;
+            }
+            result = EntityUtils.toString(responseEntity,"utf-8");
         } catch (IOException e) {
             e.printStackTrace();
         }

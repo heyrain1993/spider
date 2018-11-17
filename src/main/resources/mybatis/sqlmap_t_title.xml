@@ -2,19 +2,21 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="TitleMapper">
+<mapper namespace="com.heyu.spider.page.jdSort.dao.TitleDao">
     <sql id="selectSql">
         SELECT
         `id` as id,
+        `dict_id` as dictId,
         `first_title` as firstTitle,
         `second_title` as secondTitle,
         `thrid_title` as thridTitle,
+        `url` as url
         `create_time` as createTime,
         `update_time` as updateTime
         FROM t_title
     </sql>
 
-    <select id="selectById" resultType="com.heyu.spider.page.entity.title.Title">
+    <select id="selectById" resultType="com.heyu.spider.page.jdSort.entity.Title">
         <include refid="selectSql" />
         WHERE
         id = #{id}
@@ -22,23 +24,34 @@
     </select>
 
 
-    <insert id="insert" parameterType="com.heyu.spider.page.entity.title.Title" useGeneratedKeys="true" keyProperty="id" >
+    <insert id="insert" parameterType="com.heyu.spider.page.jdSort.entity.Title" useGeneratedKeys="true" keyProperty="id" >
         INSERT INTO
-        t_title (`first_title`,`second_title`,`thrid_title`,`create_time`,`update_time`)
-        VALUES (#{firstTitle},#{secondTitle},#{thridTitle},#{createTime},#{updateTime})
+        t_title (`dict_id`,`first_title`,`second_title`,`thrid_title`,`url`,`create_time`,`update_time`)
+        VALUES (#{dictId},#{firstTitle},#{secondTitle},#{thridTitle},#{url},#{createTime},#{updateTime})
     </insert>
 
-    <delete id="deleteById" parameterType="com.heyu.spider.page.entity.title.Title">
+    <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO
+        t_title (`dict_id`,`first_title`,`second_title`,`thrid_title`,`url`,`create_time`,`update_time`)
+        VALUES
+        <if test="list != null and list.size != 0">
+            <foreach collection ="list" item="item" index= "index" separator =",">
+                (#{item.dictId},#{item.firstTitle},#{item.secondTitle},#{item.thridTitle},#{item.url},#{item.createTime},#{item.updateTime})
+            </foreach>
+        </if>
+    </insert>
+
+    <delete id="deleteById" parameterType="com.heyu.spider.page.jdSort.entity.Title">
         DELETE FROM t_title
         WHERE
         id = #{id}
     </delete>
 
-    <select id="findAllList" resultType="com.heyu.spider.page.entity.title.Title">
+    <select id="findAllList" resultType="com.heyu.spider.page.jdSort.entity.Title">
     <include refid="selectSql" />
     </select>
 
-    <select id="findByCondition" resultType="com.heyu.spider.page.entity.title.Title">
+    <select id="findByCondition" resultType="com.heyu.spider.page.jdSort.entity.Title">
     <include refid="selectSql" />
         <where>
             1=1
@@ -54,12 +67,14 @@
         </where>
     </select>
 
-    <update id="update" parameterType="com.heyu.spider.page.entity.title.Title">
+    <update id="update" parameterType="com.heyu.spider.page.jdSort.entity.Title">
         update t_title
         set
+        `dict_id` = #{dictId},
         `first_title` = #{firstTitle},
         `second_title` = #{secondTitle},
         `thrid_title` = #{thridTitle},
+        `url` = #{url},
         `create_time` = #{createTime},
         `update_time` = #{updateTime}
         where

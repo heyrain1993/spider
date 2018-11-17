@@ -1,17 +1,15 @@
-package com.heyu.spider.page.service.dict;
-
-import com.heyu.spider.page.entity.dict.Dict;
-import com.heyu.spider.page.api.dict.IDictService;
-import com.heyu.spider.page.dao.dict.DictDao;
+package com.heyu.spider.page.jdSort.impl;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.heyu.spider.page.jdSort.api.IDictService;
+import com.heyu.spider.page.jdSort.dao.DictDao;
+import com.heyu.spider.page.jdSort.entity.Dict;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.yunji.oms.stock.entity.common.PageData;
-import com.yunji.oms.stock.entity.common.PageUtils;
 
 
 @Service("dictService")
@@ -21,44 +19,44 @@ public class DictServiceImpl implements IDictService {
     private DictDao dictDao;
 
     /**
-     *  ¸ù¾Ýid²éÕÒ
+     *  ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½ï¿½ï¿½
      */
     public Dict getById(Integer id) {
         return dictDao.findById(id);
     }
 
     /**
-     *  ²åÈë¼ÇÂ¼
+     *  ï¿½ï¿½ï¿½ï¿½ï¿½Â¼
      */
     public Boolean insert(Dict dict) {
         return dictDao.insert(dict);
     }
 
     /**
-     *  ¸ù¾ÝidÉ¾³ý
+     *  ï¿½ï¿½ï¿½ï¿½idÉ¾ï¿½ï¿½
      */
     public Boolean deleteById(Integer id) {
         return dictDao.deleteById(id);
     }
     /**
-     *  ²éÕÒËùÓÐ
+     *  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public List<Dict> findAllList() {
         return dictDao.findAllList();
     }
 
     /**
-    *   ·ÖÒ³²éÕÒ
+    *   ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½
     */
-    public PageData<Dict> findByPage(Dict dict,PageUtils pageUtils){
-        //»ñÈ¡Êý¾Ý¿âÖÐ×ÜÊý
+    /*public PageData<Dict> findByPage(Dict dict,PageUtils pageUtils){
+        //ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Long count=dictDao.getTotalCount(dict);
         if(count == null || count==0){
             return PageData.EMPTY_PAGE;
         }
         List<Dict> resultList=dictDao.findByCondition(pageUtils.getPage().intValue(),pageUtils.getRows(),dict);
         return new PageData<Dict>(resultList,count);
-    }
+    }*/
 
     public Boolean update(Dict dict){
         return dictDao.update(dict);

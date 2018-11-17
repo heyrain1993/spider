@@ -1,75 +1,57 @@
-package com.heyu.spider.page.dao.dict;
+package com.heyu.spider.page.jdSort.dao;
 
-import com.heyu.spider.page.entity.dict.Dict;
-import java.util.List;
+import com.heyu.spider.page.jdSort.entity.Dict;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public class DictDao{
-
-    @Autowired
-    private SqlSession session;
+@Mapper
+public interface DictDao{
 
     /**
-     *  ¸ù¾Ýid²éÕÒ
+     *  ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½ï¿½ï¿½
      */
-    public Dict findById(Integer id){
-        return session.selectOne("DictMapper.selectById",id);
-    }
+    public Dict findById(Integer id);
 
     /**
-     *  ²åÈë¼ÇÂ¼
+     *  ï¿½ï¿½ï¿½ï¿½ï¿½Â¼
      */
-    public Boolean insert(Dict dict){
-        return session.insert("DictMapper.insert",dict) > 0;
-    }
+    public Boolean insert(Dict dict);
 
     /**
-     *  ¸ù¾ÝidÉ¾³ý
+     *  ï¿½ï¿½ï¿½ï¿½idÉ¾ï¿½ï¿½
      */
-    public Boolean deleteById(Integer id){
-        return session.delete("DictMapper.deleteById",id) > 0;
-    }
+    public Boolean deleteById(Integer id);
     /**
-     *  ²éÕÒËùÓÐ
+     *  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
-    public List<Dict> findAllList(){
-        return session.selectList("DictMapper.findAllList");
-    }
+    public List<Dict> findAllList();
 
     /**
-    * ·ÖÒ³²éÑ¯ÁÐ±í
+    * ï¿½ï¿½Ò³ï¿½ï¿½Ñ¯ï¿½Ð±ï¿½
     */
-    public List<Dict> findByCondition(Integer pageNumber,Integer pageSize,Dict dict){
-        Map<String ,Object> paramsMap = new HashMap<String,Object>(3);
-        paramsMap.put("offset",(pageNumber-1)*pageSize);
-        paramsMap.put("pageSize",pageSize);
-        paramsMap.put("dict",dict);
-        return session.selectList("DictMapper.findByCondition",paramsMap);
-    }
+    public List<Dict> findByCondition(Integer pageNumber,Integer pageSize,Dict dict);
 
     /**
-    * »ñÈ¡·ÖÒ³µÄ×ÜÊý
+    * ï¿½ï¿½È¡ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     */
-    public Long getTotalCount(Dict dict){
-        Map<String,Object> paramsMap = new HashMap<String,Object>(1);
-        paramsMap.put("dict",dict);
-        return session.selectOne("DictMapper.getTotalCount",paramsMap);
-    }
+    public Long getTotalCount(Dict dict);
 
     /**
-    * ¸üÐÂ
+    * ï¿½ï¿½ï¿½ï¿½
     *
     */
-    public Boolean update(Dict dict){
-        return session.update("DictMapper.update",dict) >0;
-    }
+    public Boolean update(Dict dict);
 
-    public void setSession(SqlSession session) {
-        this.session = session;
-    }
+    List<String> findSecond(@Param("firstDict") String firstDict);
+
+    List<String> findFirst();
+
+    List<Dict> findThird(@Param("firstDict")String firstDict, @Param("secondDict") String secondDict);
+
+    void insertBatch(List<Dict> dicts);
 }

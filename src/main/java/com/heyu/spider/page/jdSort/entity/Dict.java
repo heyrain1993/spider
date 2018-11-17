@@ -1,4 +1,4 @@
-package com.heyu.spider.page.jdSort.entity.dict;
+package com.heyu.spider.page.jdSort.entity;
 import java.util.Date;
 
 import java.io.Serializable;
@@ -25,6 +25,8 @@ public class Dict implements Serializable{
         ����Ŀ¼
      */
     private String thridDict;
+
+    private String url;
 
     /**
         ����ʱ��
@@ -73,6 +75,13 @@ public class Dict implements Serializable{
         this.thridDict = thridDict;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public Date getCreateTime() {
         return createTime;
