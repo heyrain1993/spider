@@ -37,6 +37,20 @@ public class SortTest {
         try {
             //spiderJD.spiderTitle();
             spiderJD.spiderOption();
+
+            //titleDao.findAllList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testSpiderFirstPage(){
+        /*List<Dict> list = dictService.findAllList();
+        System.out.println(list);*/
+        try {
+            //spiderJD.spiderTitle();
+            spiderJD.spiderFirstPage();
             //titleDao.findAllList();
         } catch (Exception e) {
             e.printStackTrace();

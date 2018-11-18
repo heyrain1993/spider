@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heyu.spider.page.jdSort.dao.DictTempDao">
+    <sql id="selectSql">
+        SELECT
+        `id` as id,
+        `first_dict` as firstDict,
+        `second_dict` as secondDict,
+        `thrid_dict` as thridDict,
+        `url` as url,
+        `create_time` as createTime,
+        `update_time` as updateTime
+        FROM t_dict_temp
+    </sql>
+
+    <select id="selectById" resultType="com.heyu.spider.page.jdSort.entity.Dict">
+        <include refid="selectSql" />
+        WHERE
+        id = #{id}
+        LIMIT 1
+    </select>
+
+
+    <insert id="insert" parameterType="com.heyu.spider.page.jdSort.entity.Dict" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO
+        t_dict_temp (`first_dict`,`second_dict`,`thrid_dict`,`url`,`create_time`,`update_time`)
+        VALUES (#{firstDict},#{secondDict},#{thridDict},#{url},#{createTime},#{updateTime})
+    </insert>
+
+    <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO
+        t_dict_temp (`first_dict`,`second_dict`,`thrid_dict`,`url`,`create_time`,`update_time`)
+        VALUES
+        <if test="list != null and list.size != 0">
+            <foreach collection ="list" item="item" index= "index" separator =",">
+                (#{item.firstDict},#{item.secondDict},#{item.thridDict},#{item.url},#{item.createTime},#{item.updateTime})
+            </foreach>
+        </if>
+    </insert>
+
+    <delete id="deleteById" parameterType="com.heyu.spider.page.jdSort.entity.Dict">
+        DELETE FROM t_dict_temp
+        WHERE
+        id = #{id}
+    </delete>
+
+    <select id="findAllList" resultType="com.heyu.spider.page.jdSort.entity.Dict">
+    <include refid="selectSql" />
+    where id > 1792
+    </select>
+
+    <select id="findSecond" resultType="java.lang.String">
+        SELECT second_dict
+        FROM  t_dict_temp
+        WHERE first_dict = #{firstDict}
+        GROUP BY second_dict
+    </select>
+
+    <select id="findThird" resultType="com.heyu.spider.page.jdSort.entity.Dict">
+        SELECT
+        `id` as id,
+        `first_dict` as firstDict,
+        `second_dict` as secondDict,
+        `thrid_dict` as thridDict,
+        `url` as url,
+        `create_time` as createTime,
+        `update_time` as updateTime
+        FROM  t_dict_temp
+        WHERE second_dict = #{secondDict} and first_dict = #{firstDict}
+
+    </select>
+
+    <select id="findFirst" resultType="java.lang.String">
+        SELECT first_dict
+        FROM  t_dict_temp
+        GROUP BY first_dict
+    </select>
+
+    <select id="findByCondition" resultType="com.heyu.spider.page.jdSort.entity.Dict">
+    <include refid="selectSql" />
+        <where>
+            1=1
+        </where>
+        limit #{offset},#{pageSize}
+    </select>
+
+    <select id="getTotalCount" resultType="java.lang.Long">
+        SELECT count(1)
+        FROM t_dict_temp
+        <where>
+            1=1
+        </where>
+    </select>
+
+    <update id="update" parameterType="com.heyu.spider.page.jdSort.entity.Dict">
+        update t_dict_temp
+        set
+        `first_dict` = #{firstDict},
+        `second_dict` = #{secondDict},
+        `thrid_dict` = #{thridDict},
+        `url` = #{url},
+        `create_time` = #{createTime},
+        `update_time` = #{updateTime}
+        where
+    id = #{id}
+    </update>
+
+
+</mapper>
